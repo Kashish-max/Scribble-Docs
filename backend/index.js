@@ -7,14 +7,13 @@ import api from './api/index.js';
 import { Server } from 'socket.io';
 import sharedSession from 'express-socket.io-session';
 import express from 'express';
-import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import session from 'express-session';
-// import MongoStore from 'connect-mongo';
-// import cookieSession from 'cookie-session';
+import MongoStore from 'connect-mongo';
+import cookieSession from 'cookie-session';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -28,22 +27,22 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use(morgan("dev"));
 app.use(helmet());
-app.use(cors({ origin: [
-  `${process.env.FRONTEND_URL}`,
-], credentials: true }));
+app.use(cors({ 
+  origin: [`${process.env.FRONTEND_URL}`], 
+  credentials: true 
+}));
 app.use(express.json());
 
 const sessionMiddleware = session({
   secret: process.env.COOKIE_KEY,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   // store: MongoStore.create({
-  //   mongoUrl: `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster-scribble-docs.9bbttdh.mongodb.net/?retryWrites=true&w=majority`,
+  //   mongoUrl: process.env.DB_URL,
   // }),  
   cookie: {
-    maxAge: 10800000 // 3 hours in milliseconds
+    maxAge: 10800000, // 3 hours in milliseconds
   }
 });
 
@@ -64,9 +63,7 @@ Connection();
 
 app.get("/", (req, res) => {
   res.json({
-    message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄",
-    session_user: req.session,
-    cookie_user: req.user,
+    message: "Backend is active!",
   });
 });
 

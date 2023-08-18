@@ -40,9 +40,7 @@ export default function Login () {
         }   
     }, []);
 
-
-
-    let newWindow = null;
+    let newWindow = null;    
     const redirectToGoogleSSO = async () => {
         let timer = null;
         let googleLoginURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/login/google`;
@@ -61,7 +59,6 @@ export default function Login () {
                     if (newWindow.closed) {
                       newWindow = null;
                       if (timer) clearInterval(timer);
-                      fetchData(process.env.NEXT_PUBLIC_BACKEND_URL, loginConfig).then((data) => {console.log("TEST: ", data);});
                       const data = await fetchData(loginURL, loginConfig);
                       console.log("User: ", data);
                       if(data && data.email) {
