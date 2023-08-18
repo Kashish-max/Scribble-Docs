@@ -1,6 +1,6 @@
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { DocumentTextIcon } from '@heroicons/react/24/outline'
+import { Fragment, useRef, useState } from "react"
+import { Dialog, Transition } from "@headlessui/react"
+import { DocumentTextIcon } from "@heroicons/react/24/outline"
 
 const CreateDocumentModal = ({ open, setOpen, redirectTo }) => {
   const cancelButtonRef = useRef(null)

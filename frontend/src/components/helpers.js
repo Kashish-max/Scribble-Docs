@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function fetchData(url, config) {
   try {
@@ -13,7 +13,7 @@ export async function fetchData(url, config) {
 
 export const Logout = async () => {
   const response = await axios
-    .get("http://localhost:9000/api/v1/logout", { withCredentials: true })
+    .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/logout`, { withCredentials: true })
     .catch((err) => {
       console.log("Failed to Logout ", err);
     });

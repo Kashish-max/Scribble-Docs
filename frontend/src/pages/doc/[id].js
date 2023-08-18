@@ -1,11 +1,11 @@
-import { useState, useEffect, use } from 'react';
-import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux';
-import Header from '@/components/Header';
+import { useState, useEffect, use } from "react";
+import { useRouter } from "next/router"
+import { useDispatch, useSelector } from "react-redux";
+import Header from "@/components/Header";
 
-import { fetchData } from '@/components/helpers';
-import Loading from '@/components/Loading';
-import { selectAuthState, selectUser, selectIsNewDoc, setAuthState, setUser, setIsNewDoc } from '@/store/authSlice';
+import { fetchData } from "@/components/helpers";
+import Loading from "@/components/Loading";
+import { selectAuthState, selectUser, selectIsNewDoc, setAuthState, setUser, setIsNewDoc } from "@/store/authSlice";
 
 const Doc = () => {
     const router = useRouter();
@@ -17,7 +17,7 @@ const Doc = () => {
     const dispatch = useDispatch();
 
     const [isLoading, setIsLoading] = useState(true);
-    const loginURL = "http://localhost:9000/api/v1/auth/user";
+    const loginURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/user`;
     const loginConfig = { withCredentials: true };
   
     useEffect(() => {
@@ -26,7 +26,7 @@ const Doc = () => {
                 if(data && data.email) {
                     dispatch(setAuthState(true));
                     dispatch(setUser(data));
-                    // let docValid = await fetchData(`http://localhost:9000/api/v1/doc/validate/${id}`, loginConfig);
+                    // let docValid = await fetchData(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/doc/validate/${id}`, loginConfig);
                     // const err = docValid?.response?.status;
                     // if(( err != "404") && !isNewDoc) {
                     if(!isNewDoc) {
@@ -45,7 +45,7 @@ const Doc = () => {
     }, [authState]);
 
     const verifyUserAuthorization = async () => {
-        fetchData(`http://localhost:9000/api/v1/doc/users/${id}`, loginConfig).then((data) => {
+        fetchData(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/doc/users/${id}`, loginConfig).then((data) => {
             if(data && data.users) {
                 const userAuthorized = data.users.find(
                     (docUser) => docUser.email === user.email
@@ -65,8 +65,8 @@ const Doc = () => {
         <Loading />
     )    
 
-    if (typeof window !== 'undefined') {
-        const Editor = require('@/components/Editor').default;
+    if (typeof window !== "undefined") {
+        const Editor = require("@/components/Editor").default;
     
         return (
           <div>

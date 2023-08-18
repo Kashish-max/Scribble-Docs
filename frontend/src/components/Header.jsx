@@ -34,7 +34,7 @@ const Header = ({search}) => {
         </div>
       </Button>
       {/* Logo */}
-      <button className="flex items-center ms-4 py-1.5" onClick={() => router.push('/')}>
+      <button className="flex items-center ms-4 py-1.5" onClick={() => router.push("/")}>
         <img className="w-7" src="/assets/logo.svg" alt="Logo" />
         <h1 className="hidden md:inline-flex ml-2 text-gray-700 text-xl">
             <span className="font-semibold pe-1">Scribble</span> Docs

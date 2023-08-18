@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
-  const options = { day: 'numeric', month: 'long', year: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
+  const options = { day: "numeric", month: "long", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
 }
 
 const DocumentRow = ({id, fileName, date}) => {

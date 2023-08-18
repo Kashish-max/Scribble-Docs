@@ -35,7 +35,7 @@ export const AvatarMenu = ({ Logout, user }) => {
           </Button>
       </MenuHandler>
       <MenuList>
-        <MenuItem className="flex items-center gap-4 py-2 pr-8 pl-2" onClick={() => router.push('/')}>
+        <MenuItem className="flex items-center gap-4 py-2 pr-8 pl-2" onClick={() => router.push("/")}>
           <Avatar
               variant="circular"
               alt="tania andrew"

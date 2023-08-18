@@ -1,10 +1,11 @@
 import express from "express";
 import passport from "passport";
+import {} from 'dotenv/config'
 
 const router = express.Router();
 
-const successLoginUrl = "http://localhost:3000/login/success";
-const errorLoginUrl = "http://localhost:3000/login/error";
+const successLoginUrl = `${process.env.FRONTEND_URL}/login/success`;
+const errorLoginUrl = `${process.env.FRONTEND_URL}/login/error`;
 
 
 router.get(

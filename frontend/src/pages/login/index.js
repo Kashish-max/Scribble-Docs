@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router'
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router"
 import { useDispatch, useSelector } from "react-redux";
 
 import { Button } from "@material-tailwind/react";
 import { UserIcon } from "@heroicons/react/24/solid";
 
-import Loading from '@/components/Loading';
-import { fetchData } from '@/components/helpers';
+import Loading from "@/components/Loading";
+import { fetchData } from "@/components/helpers";
 import { selectAuthState, setAuthState, setUser } from "@/store/authSlice";;
 
 export default function Login () {
@@ -15,7 +15,7 @@ export default function Login () {
 
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(true);
-    const loginURL = "http://localhost:9000/api/v1/auth/user";
+    const loginURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/user`;
     const loginConfig = { withCredentials: true };
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export default function Login () {
     let newWindow = null;
     const redirectToGoogleSSO = async () => {
         let timer = null;
-        let googleLoginURL = "http://localhost:9000/api/v1/login/google";
+        let googleLoginURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/login/google`;
 
         if(!newWindow) {
             newWindow = window.open(
@@ -61,6 +61,7 @@ export default function Login () {
                     if (newWindow.closed) {
                       newWindow = null;
                       if (timer) clearInterval(timer);
+                      fetchData(process.env.NEXT_PUBLIC_BACKEND_URL, loginConfig).then((data) => {console.log("TEST: ", data);});
                       const data = await fetchData(loginURL, loginConfig);
                       console.log("User: ", data);
                       if(data && data.email) {

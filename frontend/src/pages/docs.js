@@ -1,5 +1,5 @@
 import Head from "next/head"
-import Link from 'next/link'
+import Link from "next/link"
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import Header from "@/components/Header"
 import { fetchData } from "@/components/helpers";
 import CreateDocumentModal from "@/components/modals/CreateDoc";
 import DocumentRow from "@/components/DocumentRow";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 
 export default function Documents() {
@@ -25,7 +25,7 @@ export default function Documents() {
   const [userDocs, setUserDocs] = useState();
 
   const [isLoading, setIsLoading] = useState(true);
-  const loginURL = "http://localhost:9000/api/v1/auth/user";
+  const loginURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/auth/user`;
   const loginConfig = { withCredentials: true };
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Documents() {
   }
 
   const fetchUserDocs = async () => {
-    const userDocsURL = "http://localhost:9000/api/v1/user/docs";
+    const userDocsURL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/user/docs`;
     const userDocsConfig = { withCredentials: true };
 
     try {

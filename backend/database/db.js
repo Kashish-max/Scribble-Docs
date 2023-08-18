@@ -1,7 +1,7 @@
 import mongoose  from 'mongoose';
 
-const Connection = async (username = process.env.DB_USERNAME, password = process.env.DB_PASSWORD) => {
-    const URL = `mongodb+srv://${username}:${password}@docflow.mxnkz3a.mongodb.net/?retryWrites=true&w=majority`;
+const Connection = async () => {
+    const URL = process.env.DB_URL;
 
     try {
         await mongoose.connect(URL, { useUnifiedTopology: true, useNewUrlParser: true });
